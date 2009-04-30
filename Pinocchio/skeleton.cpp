@@ -29,7 +29,8 @@ void Skeleton::initCompressed()
     fcFractionV.resize(fPrevV.size(), -1.);
     
     for(i = 0; i < (int)fPrevV.size(); ++i) {
-        if(fGraphV.edges[i].size() == 2)
+		// Make sure to always include the root in the compressed skel!
+        if(fGraphV.edges[i].size() == 2 && i != 0)
             continue;
         fcMapV[i] = cfMapV.size();
         cfMapV.push_back(i);
