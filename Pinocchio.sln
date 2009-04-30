@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DemoUI", "DemoUI\DemoUI.vcproj", "{D512EF05-3826-4CE9-A527-EF75DF68FE26}"
+	ProjectSection(ProjectDependencies) = postProject
+		{835E35C4-9AB1-4CB3-A8A9-A0B89171280D} = {835E35C4-9AB1-4CB3-A8A9-A0B89171280D}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Pinocchio", "Pinocchio\Pinocchio.vcproj", "{835E35C4-9AB1-4CB3-A8A9-A0B89171280D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D512EF05-3826-4CE9-A527-EF75DF68FE26}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D512EF05-3826-4CE9-A527-EF75DF68FE26}.Debug|Win32.Build.0 = Debug|Win32
+		{D512EF05-3826-4CE9-A527-EF75DF68FE26}.Release|Win32.ActiveCfg = Release|Win32
+		{D512EF05-3826-4CE9-A527-EF75DF68FE26}.Release|Win32.Build.0 = Release|Win32
+		{835E35C4-9AB1-4CB3-A8A9-A0B89171280D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{835E35C4-9AB1-4CB3-A8A9-A0B89171280D}.Debug|Win32.Build.0 = Debug|Win32
+		{835E35C4-9AB1-4CB3-A8A9-A0B89171280D}.Release|Win32.ActiveCfg = Release|Win32
+		{835E35C4-9AB1-4CB3-A8A9-A0B89171280D}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
