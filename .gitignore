@@ -11,6 +11,9 @@
 bin/
 obj/
 Debug/
+debug/
+Release/
+release/
 *.obj
 \#*
 .\#*
