@@ -121,7 +121,7 @@ public:
             //get bones
             double minDist = 1e37;
             for(j = 0; j < bones; ++j) {
-                if(boneDists[i][j] < minDist) {
+                if(boneDists[i][j] < minDist && boneVis[i][j]) {
                     closest[i] = j;
                     minDist = boneDists[i][j];
                 }
