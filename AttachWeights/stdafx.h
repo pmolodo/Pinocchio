@@ -6,10 +6,12 @@
 #pragma once
 
 
-#define WIN32_LEAN_AND_MEAN // Exclude rarely-used stuff from Windows headers
+#define WIN32_LEAN_AND_MEAN		// Exclude rarely-used stuff from Windows headers
 #include <stdio.h>
-//#include <tchar.h>
-// this definitions are for linux
+#ifdef WIN32		// Windows defs
+#include <tchar.h>
+
+#else				// linux defs
 #include <stdlib.h>
 #include <fcntl.h>
 #include <math.h>
@@ -121,6 +123,6 @@ typedef double VWTIME;
 /** returns the amount of time in seconds since some arbitrary moment. */
 inline VWTIME VWGetTime() { return 0.0; }
 
-
+#endif  // end linux defs
 
 // TODO: reference additional headers your program requires here
