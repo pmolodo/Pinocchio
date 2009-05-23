@@ -15,7 +15,7 @@ struct ArgData
 {
     ArgData() :
         stopAtMesh(false), stopAfterCircles(false), skelScale(1.), noFit(true),
-        skeleton(HumanSkeleton())
+        skeleton(HumanSkeleton()), stiffness(1.)
     {
     }
     
@@ -27,6 +27,7 @@ struct ArgData
     bool noFit;
     Skeleton skeleton;
     string skeletonname;
+	double stiffness;
 };
 
 
@@ -35,7 +36,7 @@ void printUsageAndExit()
     cout << "Usage: attachWeights filename.{obj | ply | off | gts | stl}" << endl;
     cout << "              [-skel skelname] [-rot x y z deg]* [-scale s]" << endl;
     cout << "              [-meshonly | -mo] [-circlesonly | -co]" << endl;
-    cout << "              [-fit]" << endl;
+    cout << "              [-fit] [-stiffness s]" << endl;
 
     exit(0);
 }
@@ -105,6 +106,14 @@ ArgData processArgs(const vector<string> &args)
             out.noFit = false;
             continue;
         }
+        if(curStr == string("-stiffnes")) {
+            if(cur >= num) {
+                cout << "No stiffness provided; exiting." << endl;
+                printUsageAndExit();
+            }
+            sscanf(args[cur++].c_str(), "%lf", &out.stiffness);
+            continue;
+        }
         cout << "Unrecognized option: " << curStr << endl;
         printUsageAndExit();
     }
@@ -150,7 +159,7 @@ void process(const vector<string> &args)
         for(i = 0; i < (int)o.embedding.size(); ++i)
             o.embedding[i] = m.toAdd + o.embedding[i] * m.scale;
 
-        o.attachment = new Attachment(m, a.skeleton, o.embedding, tester);
+		o.attachment = new Attachment(m, a.skeleton, o.embedding, tester, a.stiffness);
 
         delete tester;
         delete distanceField;

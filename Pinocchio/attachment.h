@@ -68,7 +68,7 @@ class PINOCCHIO_API Attachment
 public:
     Attachment() : a(NULL) {}
     Attachment(const Attachment &);
-    Attachment(const Mesh &mesh, const Skeleton &skeleton, const vector<Vector3> &match, const VisibilityTester *tester);
+    Attachment(const Mesh &mesh, const Skeleton &skeleton, const vector<Vector3> &match, const VisibilityTester *tester, double initialHeatWeight=1.);
     virtual ~Attachment();
 
     Mesh deform(const Mesh &mesh, const vector<Transform<> > &transforms) const;

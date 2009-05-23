@@ -46,7 +46,8 @@ class AttachmentPrivate1 : public AttachmentPrivate {
 public:
     AttachmentPrivate1() {}
 
-    AttachmentPrivate1(const Mesh &mesh, const Skeleton &skeleton, const vector<Vector3> &match, const VisibilityTester *tester)
+    AttachmentPrivate1(const Mesh &mesh, const Skeleton &skeleton, const vector<Vector3> &match, const VisibilityTester *tester,
+		double initialHeatWeight)
     {
         int i, j;
         int nv = mesh.vertices.size();
@@ -128,7 +129,7 @@ public:
             }
             for(j = 0; j < bones; ++j)
                 if(boneVis[i][j] && boneDists[i][j] <= minDist * 1.00001)
-                    H[i] += 1. / SQR(1e-8 + boneDists[i][closest[i]]);
+                    H[i] += initialHeatWeight / SQR(1e-8 + boneDists[i][closest[i]]);
 
             //get laplacian
             double sum = 0.;
@@ -246,7 +247,8 @@ Mesh Attachment::deform(const Mesh &mesh, const vector<Transform<> > &transforms
     return a->deform(mesh, transforms);
 }
 
-Attachment::Attachment(const Mesh &mesh, const Skeleton &skeleton, const vector<Vector3> &match, const VisibilityTester *tester)
+Attachment::Attachment(const Mesh &mesh, const Skeleton &skeleton, const vector<Vector3> &match, const VisibilityTester *tester,
+					   double initialHeatWeight)
 {
-    a = new AttachmentPrivate1(mesh, skeleton, match, tester);
+    a = new AttachmentPrivate1(mesh, skeleton, match, tester, initialHeatWeight);
 }
