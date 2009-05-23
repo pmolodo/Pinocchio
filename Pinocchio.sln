@@ -10,8 +10,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Pinocchio", "Pinocchio\Pino
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AttachWeights", "AttachWeights\AttachWeights.vcproj", "{09E0B2DD-ABD8-4202-A4E7-047CC86BA355}"
 	ProjectSection(ProjectDependencies) = postProject
-		{835E35C4-9AB1-4CB3-A8A9-A0B89171280D} = {835E35C4-9AB1-4CB3-A8A9-A0B89171280D}
+		{F66AD322-ABB4-4992-8FEF-BB9CB6BDD9D7} = {F66AD322-ABB4-4992-8FEF-BB9CB6BDD9D7}
 	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PinocchioStatic", "PinocchioStatic\PinocchioStatic.vcproj", "{F66AD322-ABB4-4992-8FEF-BB9CB6BDD9D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +33,10 @@ Global
 		{09E0B2DD-ABD8-4202-A4E7-047CC86BA355}.Debug|Win32.Build.0 = Debug|Win32
 		{09E0B2DD-ABD8-4202-A4E7-047CC86BA355}.Release|Win32.ActiveCfg = Release|Win32
 		{09E0B2DD-ABD8-4202-A4E7-047CC86BA355}.Release|Win32.Build.0 = Release|Win32
+		{F66AD322-ABB4-4992-8FEF-BB9CB6BDD9D7}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F66AD322-ABB4-4992-8FEF-BB9CB6BDD9D7}.Debug|Win32.Build.0 = Debug|Win32
+		{F66AD322-ABB4-4992-8FEF-BB9CB6BDD9D7}.Release|Win32.ActiveCfg = Release|Win32
+		{F66AD322-ABB4-4992-8FEF-BB9CB6BDD9D7}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

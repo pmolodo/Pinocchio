@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8.00"
-	Name="AttachWeights"
-	ProjectGUID="{09E0B2DD-ABD8-4202-A4E7-047CC86BA355}"
-	RootNamespace="AttachWeights"
+	Name="PinocchioStatic"
+	ProjectGUID="{F66AD322-ABB4-4992-8FEF-BB9CB6BDD9D7}"
+	RootNamespace="PinocchioStatic"
 	Keyword="Win32Proj"
 	>
 	<Platforms>
@@ -19,7 +19,8 @@
 			Name="Debug|Win32"
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="1"
+			ConfigurationType="4"
+			UseOfMFC="1"
 			CharacterSet="1"
 			>
 			<Tool
@@ -40,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;PINOCCHIO_STATIC"
+				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;PINOCCHIO_STATIC"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
@@ -59,17 +60,10 @@
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
-				Name="VCLinkerTool"
-				LinkIncremental="2"
-				GenerateDebugInformation="true"
-				SubSystem="1"
-				TargetMachine="1"
+				Name="VCLibrarianTool"
 			/>
 			<Tool
 				Name="VCALinkTool"
-			/>
-			<Tool
-				Name="VCManifestTool"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -81,12 +75,6 @@
 				Name="VCFxCopTool"
 			/>
 			<Tool
-				Name="VCAppVerifierTool"
-			/>
-			<Tool
-				Name="VCWebDeploymentTool"
-			/>
-			<Tool
 				Name="VCPostBuildEventTool"
 			/>
 		</Configuration>
@@ -94,7 +82,7 @@
 			Name="Release|Win32"
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="1"
+			ConfigurationType="4"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
 			>
@@ -115,11 +103,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				Optimization="3"
-				InlineFunctionExpansion="2"
-				EnableIntrinsicFunctions="true"
-				FavorSizeOrSpeed="1"
-				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;PINOCCHIO_STATIC"
+				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;PINOCCHIO_STATIC"
 				RuntimeLibrary="0"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
@@ -136,19 +120,10 @@
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
-				Name="VCLinkerTool"
-				LinkIncremental="1"
-				GenerateDebugInformation="true"
-				SubSystem="1"
-				OptimizeReferences="2"
-				EnableCOMDATFolding="2"
-				TargetMachine="1"
+				Name="VCLibrarianTool"
 			/>
 			<Tool
 				Name="VCALinkTool"
-			/>
-			<Tool
-				Name="VCManifestTool"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -158,12 +133,6 @@
 			/>
 			<Tool
 				Name="VCFxCopTool"
-			/>
-			<Tool
-				Name="VCAppVerifierTool"
-			/>
-			<Tool
-				Name="VCWebDeploymentTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
@@ -179,11 +148,51 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\AttachWeights.cpp"
+				RelativePath="..\Pinocchio\attachment.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\stdafx.cpp"
+				RelativePath="..\Pinocchio\discretization.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Pinocchio\embedding.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Pinocchio\graphutils.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Pinocchio\indexer.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Pinocchio\intersector.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Pinocchio\lsqSolver.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Pinocchio\matrix.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Pinocchio\mesh.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Pinocchio\pinocchioApi.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Pinocchio\refinement.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Pinocchio\skeleton.cpp"
 				>
 			</File>
 		</Filter>
@@ -193,20 +202,98 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\stdafx.h"
+				RelativePath="..\Pinocchio\attachment.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Pinocchio\debugging.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Pinocchio\deriv.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Pinocchio\dtree.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Pinocchio\graphutils.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Pinocchio\hashutils.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Pinocchio\indexer.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Pinocchio\intersector.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Pinocchio\lsqSolver.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Pinocchio\mathutils.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Pinocchio\matrix.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Pinocchio\mesh.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Pinocchio\multilinear.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Pinocchio\Pinocchio.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Pinocchio\pinocchioApi.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Pinocchio\pointprojector.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Pinocchio\quaddisttree.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Pinocchio\rect.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Pinocchio\skeleton.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Pinocchio\transform.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Pinocchio\utils.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Pinocchio\vector.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Pinocchio\vecutils.h"
 				>
 			</File>
 		</Filter>
-		<Filter
-			Name="Resource Files"
-			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
-			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
-			>
-		</Filter>
-		<File
-			RelativePath=".\ReadMe.txt"
-			>
-		</File>
 	</Files>
 	<Globals>
 	</Globals>
