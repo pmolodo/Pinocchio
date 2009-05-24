@@ -106,7 +106,7 @@ ArgData processArgs(const vector<string> &args)
             out.noFit = false;
             continue;
         }
-        if(curStr == string("-stiffnes")) {
+        if(curStr == string("-stiffness")) {
             if(cur >= num) {
                 cout << "No stiffness provided; exiting." << endl;
                 printUsageAndExit();
