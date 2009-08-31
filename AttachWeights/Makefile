@@ -1,13 +1,16 @@
 CC = g++
 CCFLAGS = -c -O3 -Wall -fPIC
+#CCFLAGS = -c -g3 -O0 -Wall -fPIC
 
-attachWeights : stdfx.o AttachWeights.o
-	gcc -O3 -Wall -fPIC -o attachWeights stdafx.o AttachWeights.o ../Pinocchio/libpinocchio.a -lstdc++
+TARGET = AttachWeights
+
+$(TARGET) : stdfx.o $(TARGET).o
+	gcc -O3 -Wall -fPIC -o $(TARGET) stdafx.o $(TARGET).o ../Pinocchio/libpinocchio.a -lstdc++
 
 stdfx.o : stdafx.cpp stdafx.h
 	$(CC) $(CCFLAGS) stdafx.cpp
 	
-AttachWeights.o : AttachWeights.cpp stdafx.h
+$(TARGET).o : stdafx.h
 	$(CC) $(CCFLAGS) AttachWeights.cpp
 
 clean :

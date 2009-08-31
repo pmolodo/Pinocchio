@@ -22,7 +22,9 @@
 #include "mathutils.h"
 
 #ifndef _WIN32
+//#include <unordered_map>
 #include <ext/hash_map>
+//#include <undorderd_set>
 #include <ext/hash_set>
 
 #define _HASH_NAMESPACE __gnu_cxx
@@ -34,7 +36,7 @@ namespace _HASH_NAMESPACE {
     {
         size_t operator()(const pair<T1, T2> &p) const { return hash<T1>()(p.first) + 37 * hash<T2>()(p.second); }
     };
-    
+
     template<class T> struct hash<T *>
     {
         size_t operator()(T *p) const { return (size_t)p; }
@@ -69,7 +71,7 @@ namespace _HASH_NAMESPACE {
         size_t operator()(const std::pair<T1, T2> &p) const { return hash_compare<T1>()(p.first) + 37 * hash_compare<T2>()(p.second); }
         bool operator()(const std::pair<T1, T2> &p1, const std::pair<T1, T2> &p2) const { return p1 < p2; }
     };
-    
+
     template<class T> struct hash_compare<T *>
     {
         static const size_t bucket_size = 4;
@@ -90,5 +92,5 @@ namespace _HASH_NAMESPACE {
         }; \
     }
 #endif
-   
+
 #endif //HASHUTILS_H
