@@ -31,14 +31,14 @@ public:
     virtual Vector<double, -1> getWeights(int i) const = 0;
     virtual AttachmentPrivate *clone() const = 0;
 };
-    
+
 bool vectorInCone(const Vector3 &v, const vector<Vector3> &ns)
 {
     int i;
     Vector3 avg;
     for(i = 0; i < (int)ns.size(); ++i)
         avg += ns[i];
-        
+
     return v.normalize() * avg.normalize() > 0.5;
 }
 
@@ -62,7 +62,7 @@ public:
                 cur = mesh.edges[mesh.edges[cur].prev].twin;
             } while(cur != start);
         }
-    
+
         weights.resize(nv);
         int bones = skeleton.fGraph().verts.size() - 1;
 
@@ -71,12 +71,12 @@ public:
 
         vector<vector<double> > boneDists(nv);
         vector<vector<bool> > boneVis(nv);
-        
+
         for(i = 0; i < nv; ++i) {
             boneDists[i].resize(bones, -1);
             boneVis[i].resize(bones);
             Vector3 cPos = mesh.vertices[i].pos;
-                
+
             vector<Vector3> normals;
             for(j = 0; j < (int)edges[i].size(); ++j) {
                 int nj = (j + 1) % edges[i].size();
@@ -84,7 +84,7 @@ public:
                 Vector3 v2 = mesh.vertices[edges[i][nj]].pos - cPos;
                 normals.push_back((v1 % v2).normalize());
             }
-                    
+
             double minDist = 1e37;
             for(j = 1; j <= bones; ++j) {
                 const Vector3 &v1 = match[j], &v2 = match[skeleton.fPrev()[j]];
@@ -113,7 +113,7 @@ public:
             //get areas
             for(j = 0; j < (int)edges[i].size(); ++j) {
                 int nj = (j + 1) % edges[i].size();
-        
+
                 D[i] += ((mesh.vertices[edges[i][j]].pos - mesh.vertices[i].pos) %
                          (mesh.vertices[edges[i][nj]].pos - mesh.vertices[i].pos)).length();
             }
@@ -122,7 +122,11 @@ public:
             //get bones
             double minDist = 1e37;
             for(j = 0; j < bones; ++j) {
-                if(boneDists[i][j] < minDist && boneVis[i][j]) {
+              // Would like to change to:
+              //   if(boneDists[i][j] < minDist && boneVis[i][j])
+              // but need to make boneVis more robust - ie, check
+              // if the bone is initially outside the mesh, etc
+              if(boneDists[i][j] < minDist) {
                     closest[i] = j;
                     minDist = boneDists[i][j];
                 }
@@ -141,7 +145,7 @@ public:
                 Vector3 v2 = mesh.vertices[edges[i][j]].pos - mesh.vertices[edges[i][pj]].pos;
                 Vector3 v3 = mesh.vertices[i].pos - mesh.vertices[edges[i][nj]].pos;
                 Vector3 v4 = mesh.vertices[edges[i][j]].pos - mesh.vertices[edges[i][nj]].pos;
-                
+
                 double cot1 = (v1 * v2) / (1e-6 + (v1 % v2).length());
                 double cot2 = (v3 * v4) / (1e-6 + (v3 % v4).length());
                 sum += (cot1 + cot2);
@@ -169,7 +173,7 @@ public:
                     rhs[i] = H[i] / D[i];
             }
 
-            Ainv->solve(rhs);           
+            Ainv->solve(rhs);
             for(i = 0; i < nv; ++i) {
                 if(rhs[i] > 1.)
                     rhs[i] = 1.; //clip just in case
@@ -209,9 +213,9 @@ public:
             }
             out.vertices[i].pos = newPos;
         }
-        
+
         out.computeVertexNormals();
-    
+
         return out;
     }
 
@@ -232,7 +236,7 @@ private:
 Attachment::~Attachment()
 {
     if(a)
-        delete a;   
+        delete a;
 }
 
 Attachment::Attachment(const Attachment &att)
