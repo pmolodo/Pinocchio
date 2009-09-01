@@ -4,11 +4,17 @@ CCFLAGS = -c -O3 -Wall -fPIC
 #CCFLAGS = -c -g3 -O0 -Wall -fPIC
 LIBS = -lm -fPIC
 
-OBJECTS = attachment.o discretization.o indexer.o lsqSolver.o mesh.o \
+OBJECTS := attachment.o discretization.o indexer.o lsqSolver.o mesh.o \
 graphutils.o intersector.o matrix.o skeleton.o embedding.o \
 pinocchioApi.o refinement.o
 
-libpinocchio.a: $(OBJECTS)
+BUILD_DIR = ./`uname -s`-`uname -m`
+
+#OBJECTS_OS := $(foreach obj, $(OBJECT_NAMES), $(BUILD_DIR)/$(obj))
+
+TARGET = libpinocchio.a 
+
+$(TARGET): $(OBJECTS)
 	ar rcs $@ $^
 
 .cpp.o:

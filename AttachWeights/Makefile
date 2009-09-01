@@ -1,18 +1,29 @@
+# OS-Specfic Stuff
+ifeq ($(OSTYPE),darwin)
+	OS_COMPILE_FLAGS =  -DOSX
+	TARGET_EXT = Mac
+else
+	# LINUX stuff
+	OS_COMPILE_FLAGS =  -DLINUX
+	TARGET_EXT = Linux
+endif
+
 CC = g++
-CCFLAGS = -c -O3 -Wall -fPIC
+CCFLAGS = -c -O3 -Wall -fPIC $(OS_COMPILE_FLAGS)
 #CCFLAGS = -c -g3 -O0 -Wall -fPIC
 
-TARGET = AttachWeights
+TARGETBASE = AttachWeights
+TARGET = $(TARGETBASE)$(TARGET_EXT)
 
-$(TARGET) : stdfx.o $(TARGET).o
-	gcc -O3 -Wall -fPIC -o $(TARGET) stdafx.o $(TARGET).o ../Pinocchio/libpinocchio.a -lstdc++
+$(TARGET) : stdfx.o $(TARGETBASE).o
+	gcc -O3 -Wall -fPIC -o $(TARGET) stdafx.o $(TARGETBASE).o ../Pinocchio/libpinocchio.a -lstdc++
 
 stdfx.o : stdafx.cpp stdafx.h
 	$(CC) $(CCFLAGS) stdafx.cpp
 	
 $(TARGET).o : stdafx.h
-	$(CC) $(CCFLAGS) AttachWeights.cpp
+	$(CC) $(CCFLAGS) $(TARGET).cpp
 
 clean :
 	rm -f *.o
-	rm -f attachWeights 
+	rm -f $(TARGET)

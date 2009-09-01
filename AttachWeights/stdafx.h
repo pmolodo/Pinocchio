@@ -6,12 +6,12 @@
 #pragma once
 
 
-#define WIN32_LEAN_AND_MEAN		// Exclude rarely-used stuff from Windows headers
 #include <stdio.h>
 #ifdef WIN32		// Windows defs
+#define WIN32_LEAN_AND_MEAN             // Exclude rarely-used stuff from Windows headers
 #include <tchar.h>
 
-#else				// linux defs
+#else				// linux / OSX defs
 #include <stdlib.h>
 #include <fcntl.h>
 #include <math.h>
@@ -28,7 +28,9 @@
 #include <sys/time.h>
 #include <sys/timeb.h>
 
+#ifdef LINUX
 #include <linux/ioctl.h>
+#endif
 
 #include <time.h>
 #include <pthread.h>
