@@ -1,4 +1,5 @@
 *~
+._*
 *.ali
 *.o
 *.db
@@ -30,3 +31,6 @@ BuildLog.htm
 Pinocchio/libpinocchio.a
 AttachWeights/attachWeights
 AttachWeights/AttachWeights
+AttachWeights/AttachWeights.exe
+AttachWeights/AttachWeightsMac
+AttachWeights/AttachWeightsLinux
