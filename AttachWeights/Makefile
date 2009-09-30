@@ -10,7 +10,8 @@ endif
 
 CC = g++
 CCFLAGS = -c -O3 -Wall -fPIC $(OS_COMPILE_FLAGS)
-#CCFLAGS = -c -g3 -O0 -Wall -fPIC
+# Uncomment this to use a debug version
+#CCFLAGS = -c -g3 -O0 -Wall -fPIC $(OS_COMPILE_FLAGS)
 
 TARGETBASE = AttachWeights
 TARGET = $(TARGETBASE)$(TARGET_EXT)

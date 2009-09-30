@@ -15,10 +15,11 @@ struct ArgData
 {
     ArgData() :
         stopAtMesh(false), stopAfterCircles(false), skelScale(1.), noFit(true),
-        skeleton(HumanSkeleton()), stiffness(1.)
+        skeleton(HumanSkeleton()), stiffness(1.),
+        skelOutName("skeleton.out"), weightOutName("attachment.out")
     {
     }
-    
+
     bool stopAtMesh;
     bool stopAfterCircles;
     string filename;
@@ -27,7 +28,9 @@ struct ArgData
     bool noFit;
     Skeleton skeleton;
     string skeletonname;
-	double stiffness;
+    double stiffness;
+    string skelOutName;
+    string weightOutName;
 };
 
 
@@ -37,6 +40,7 @@ void printUsageAndExit()
     cout << "              [-skel skelname] [-rot x y z deg]* [-scale s]" << endl;
     cout << "              [-meshonly | -mo] [-circlesonly | -co]" << endl;
     cout << "              [-fit] [-stiffness s]" << endl;
+    cout << "              [-skelOut skelOutFile] [-weightOut weightOutFile]" << endl;
 
     exit(0);
 }
@@ -50,7 +54,7 @@ ArgData processArgs(const vector<string> &args)
         printUsageAndExit();
 
     out.filename = args[1];
-    
+
     while(cur < num) {
         string curStr = args[cur++];
         if(curStr == string("-skel")) {
@@ -82,7 +86,7 @@ ArgData processArgs(const vector<string> &args)
             sscanf(args[cur++].c_str(), "%lf", &y);
             sscanf(args[cur++].c_str(), "%lf", &z);
             sscanf(args[cur++].c_str(), "%lf", &deg);
-            
+
             out.meshTransform = Quaternion<>(Vector3(x, y, z), deg * M_PI / 180.) * out.meshTransform;
             continue;
         }
@@ -114,6 +118,24 @@ ArgData processArgs(const vector<string> &args)
             sscanf(args[cur++].c_str(), "%lf", &out.stiffness);
             continue;
         }
+        if(curStr == string("-skelOut")) {
+            if(cur == num) {
+                cout << "No skeleton output specified; ignoring." << endl;
+                continue;
+            }
+            curStr = args[cur++];
+            out.skelOutName = curStr;
+            continue;
+        }
+        if(curStr == string("-weightOut")) {
+            if(cur == num) {
+                cout << "No weight output specified; ignoring." << endl;
+                continue;
+            }
+            curStr = args[cur++];
+            out.weightOutName = curStr;
+            continue;
+        }
         cout << "Unrecognized option: " << curStr << endl;
         printUsageAndExit();
     }
@@ -133,8 +155,8 @@ void process(const vector<string> &args)
         cout << "Error reading file.  Aborting." << endl;
         exit(0);
         return;
-    }            
-    
+    }
+
     for(i = 0; i < (int)m.vertices.size(); ++i)
         m.vertices[i].pos = a.meshTransform * m.vertices[i].pos;
     m.normalizeBoundingBox();
@@ -173,14 +195,14 @@ void process(const vector<string> &args)
     //output skeleton embedding
     for(i = 0; i < (int)o.embedding.size(); ++i)
         o.embedding[i] = (o.embedding[i] - m.toAdd) / m.scale;
-    ofstream os("skeleton.out");
+    ofstream os(a.skelOutName.c_str());
     for(i = 0; i < (int)o.embedding.size(); ++i) {
         os << i << " " << o.embedding[i][0] << " " << o.embedding[i][1] <<
                    " " << o.embedding[i][2] << " " << a.skeleton.fPrev()[i] << endl;
     }
 
     //output attachment
-    std::ofstream astrm("attachment.out");
+    std::ofstream astrm(a.weightOutName.c_str());
     for(i = 0; i < (int)m.vertices.size(); ++i) {
         Vector<double, -1> v = o.attachment->getWeights(i);
         for(int j = 0; j < v.size(); ++j) {
