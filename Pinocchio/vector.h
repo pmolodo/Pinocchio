@@ -235,6 +235,7 @@ private:
     typedef VecOp<Dim - 1> Next;
     template<int D> friend class VecOp;
     template<class R, int D> friend class Vector;
+    template <class R, int D> friend class ::Vector;
 
     template<class R, class R1, int D>
     static void assign(const VRD1 &from, VRD &to) { to[last] = from[last]; Next::assign(from, to); }
@@ -272,6 +273,7 @@ class VecOp<1>
 {
 private:
     template<int D> friend class VecOp;
+    template <class R, int D> friend class ::Vector;
 
     template<class R, class R1, int D> static void assign(const VRD1 &from, VRD &to) { to[0] = from[0]; }
 

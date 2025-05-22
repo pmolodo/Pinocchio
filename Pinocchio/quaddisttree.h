@@ -36,7 +36,7 @@ public:
     template<class Eval> void initFunc(const Eval &eval, const MyRect &rect)
     {
         for(int i = 0; i < (1 << Dim); ++i) {
-            setValue(i, eval(rect.getCorner(i)));
+            this->setValue(i, eval(rect.getCorner(i)));
         }
         return;
     }

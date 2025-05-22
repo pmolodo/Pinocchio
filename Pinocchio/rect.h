@@ -148,17 +148,6 @@ private:
     template<class R, int D> friend class Rect;
 
     template<class R, int D>
-    static R distSq(const RRD &r, const VRD &v)
-    {
-        R out = Next::distSq(r, v);
-	if(r.getLo()[last] > v[last])
-	    return out + SQR(r.getLo()[last] - v[last]);
-	if(r.getHi()[last] < v[last])
-	    return out + SQR(v[last] - r.getHi()[last]);
-	return out;
-    }
-
-    template<class R, int D>
     static R distSq(const RRD &r, const RRD &r2)
     {
         R out = Next::distSq(r, r2);
@@ -167,6 +156,18 @@ private:
 	if(r.getHi()[last] < r2.getLo()[last])
 	    return out + SQR(r2.getLo()[last] - r.getHi()[last]);
 	return out;
+    }
+
+public:
+    template<class R, int D>
+    static R distSq(const RRD &r, const VRD &v)
+    {
+        R out = Next::distSq(r, v);
+        if(r.getLo()[last] > v[last])
+            return out + SQR(r.getLo()[last] - v[last]);
+        if(r.getHi()[last] < v[last])
+            return out + SQR(v[last] - r.getHi()[last]);
+        return out;
     }
 
 };
@@ -178,16 +179,6 @@ private:
     template<int D> friend class RectOp;
 
     template<class R, int D>
-    static R distSq(const RRD &r, const VRD &v)
-    {
-	if(r.getLo()[0] > v[0])
-	    return SQR(r.getLo()[0] - v[0]);
-	if(r.getHi()[0] < v[0])
-	    return SQR(v[0] - r.getHi()[0]);
-	return R();
-    }
-
-    template<class R, int D>
     static R distSq(const RRD &r, const RRD &r2)
     {
 	if(r.getLo()[0] > r2.getHi()[0])
@@ -195,6 +186,17 @@ private:
 	if(r.getHi()[0] < r2.getLo()[0])
 	    return SQR(r2.getLo()[0] - r.getHi()[0]);
 	return R();
+    }
+
+public:
+    template<class R, int D>
+    static R distSq(const RRD &r, const VRD &v)
+    {
+        if(r.getLo()[0] > v[0])
+            return SQR(r.getLo()[0] - v[0]);
+        if(r.getHi()[0] < v[0])
+            return SQR(v[0] - r.getHi()[0]);
+        return R();
     }
 
 };
